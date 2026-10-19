@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofoliul lui Dobai Mattias, student la Calculatoare, ULBS Sibiu: proiecte, parcurs, calendar și contact.">
+  <meta name="theme-color" content="#141310">
+  <title>Dobai Mattias — Portofoliu</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141310'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='36' fill='%23c7a45f'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@300..500&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Sari la conținut</a>
+
+  <header class="header">
+    <nav class="nav" aria-label="Navigare principală">
+      <a href="index.html" class="logo">Dobai <b>Mattias</b></a>
+      <button class="hamburger" type="button" aria-label="Deschide meniul" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link" aria-current="page">Acasă</a></li>
+        <li><a href="about.html" class="nav-link">Despre</a></li>
+        <li><a href="projects.html" class="nav-link">Proiecte</a></li>
+        <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+        <li><a href="contact.html" class="nav-link nav-cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div>
+          <div class="hero-photo reveal">
+            <img src="images/profile.png" alt="Fotografie de profil Dobai Mattias" width="88" height="88">
+          </div>
+          <h1 class="hero-title reveal d1" id="hero-title">Dobai<br><span class="ln2">Mattias</span></h1>
+          <p class="hero-role reveal d2">Student Inginerie <span class="div">·</span> Calculatoare <span class="div">·</span> ULBS Sibiu</p>
+          <p class="hero-bio reveal d3">Sunt în anul 3 la Calculatoare și îmi place să construiesc aplicații complete — de la interfață și API până la baza de date — și să învăț ceva nou din fiecare proiect.</p>
+          <div class="hero-cta reveal d4">
+            <a href="projects.html" class="btn btn-pri">
+              Vezi proiectele
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="contact.html" class="btn btn-out">Hai să vorbim</a>
+          </div>
+          <ul class="hero-stack reveal d5">
+            <li class="chip-tech">Java</li>
+            <li class="chip-tech">JavaScript</li>
+            <li class="chip-tech">React</li>
+            <li class="chip-tech">C / C++</li>
+            <li class="chip-tech">n8n</li>
+            <li class="chip-tech">Python</li>
+          </ul>
+        </div>
+
+        <div class="hero-side reveal d4">
+          <figure class="quote-card">
+            <div class="quote-mark" aria-hidden="true">“</div>
+            <blockquote class="quote-text">Discipline is the bridge between goals and accomplishment.</blockquote>
+            <figcaption class="quote-author">— Jim Rohn</figcaption>
+          </figure>
+          <div class="mini-stats">
+            <div class="mini"><div class="num">III</div><div class="lbl">An de studiu</div></div>
+            <div class="mini"><div class="num" id="repoCount">—</div><div class="lbl">Proiecte publice</div></div>
+          </div>
+        </div>
+      </div>
+      <a href="#descopera" class="scroll-cue" aria-label="Derulează la secțiunea următoare"><span></span></a>
+    </section>
+
+    <section class="section" id="descopera" aria-labelledby="descopera-title">
+      <div class="sec-hdr reveal">
+        <p class="eyebrow">Descoperă</p>
+        <h2 class="sec-title" id="descopera-title">Ce găsești <em>aici</em></h2>
+        <p class="sec-desc">Patru pagini, fiecare cu rolul ei: cine sunt, la ce lucrez, ce am în program și cum mă poți contacta.</p>
+      </div>
+      <div class="explore-grid">
+        <a class="explore-card reveal" href="about.html">
+          <span class="explore-num">01</span>
+          <h3>Despre mine</h3>
+          <p>Parcursul meu de la liceu la facultate și tehnologiile cu care lucrez zi de zi.</p>
+          <span class="explore-link">Citește povestea <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="explore-card reveal d2" href="projects.html">
+          <span class="explore-num">02</span>
+          <h3>Proiecte</h3>
+          <p>Repository-urile mele de pe GitHub, încărcate live, cu căutare și filtrare după limbaj.</p>
+          <span class="explore-link">Vezi proiectele <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="explore-card reveal d3" href="calendar.html">
+          <span class="explore-num">03</span>
+          <h3>Calendar</h3>
+          <p>Evenimentele mele din Google Calendar, adăugate, editate și șterse direct din pagină.</p>
+          <span class="explore-link">Deschide calendarul <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="explore-card reveal d4" href="contact.html">
+          <span class="explore-num">04</span>
+          <h3>Contact</h3>
+          <p>Un formular simplu dacă vrei să colaborăm, ai o întrebare sau o ofertă de internship.</p>
+          <span class="explore-link">Scrie-mi <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section section-tight" aria-labelledby="recente-title">
+      <div class="sec-hdr sec-hdr-row reveal">
+        <div>
+          <p class="eyebrow">De pe GitHub</p>
+          <h2 class="sec-title" id="recente-title">Proiecte <em>recente</em></h2>
+        </div>
+        <a href="projects.html" class="text-link">
+          Toate proiectele
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="repos" id="recentRepos" aria-busy="true">
+        <div class="repo skeleton" aria-hidden="true"><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line short"></div><div class="sk sk-meta"></div></div>
+        <div class="repo skeleton" aria-hidden="true"><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line short"></div><div class="sk sk-meta"></div></div>
+        <div class="repo skeleton" aria-hidden="true"><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line short"></div><div class="sk sk-meta"></div></div>
+      </div>
+    </section>
+
+    <section class="cta-band reveal" aria-labelledby="cta-title">
+      <div class="cta-inner">
+        <div>
+          <h2 id="cta-title">Ai un proiect <em>în minte?</em></h2>
+          <p>Caut colaborări, proiecte de echipă și oportunități de internship. Răspund la fiecare mesaj.</p>
+        </div>
+        <a href="contact.html" class="btn btn-pri">
+          Scrie-mi un mesaj
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="index.html" class="footer-name">Dobai Mattias</a>
+        <p class="footer-meta">ULBS · Inginerie · Calculatoare · © 2026</p>
+      </div>
+      <nav class="footer-nav" aria-label="Navigare subsol">
+        <ul>
+          <li><a href="about.html">Despre</a></li>
+          <li><a href="projects.html">Proiecte</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-contact">
+        <a class="fc-link" href="tel:+40769996906">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 2.5h3l1 3.2-1.6 1.6a9.5 9.5 0 004.8 4.8l1.6-1.6 3.2 1v3a1 1 0 01-1.1 1A13.8 13.8 0 012.5 3.6a1 1 0 011-1.1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          0769&nbsp;996&nbsp;906
+        </a>
+        <a class="fc-link" href="mailto:dobaimattiasfx@gmail.com">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="4" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 5.5L9 10l6.5-4.5" stroke="currentColor" stroke-width="1.4"/></svg>
+          dobaimattiasfx@gmail.com
+        </a>
+        <a class="fc-link" href="https://instagram.com/_mattiasdobai" target="_blank" rel="noopener">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="13" height="13" rx="4" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="9" r="3.2" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="5" r="1" fill="currentColor"/></svg>
+          @_mattiasdobai
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" type="button" aria-label="Înapoi la începutul paginii">
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
