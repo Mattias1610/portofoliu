@@ -386,7 +386,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: calc(var(--topbar-h) + 7svh) var(--gutter) 0;
+  padding: calc(var(--topbar-h) + 5svh) var(--gutter) 0;
   text-align: center;
   pointer-events: none;
 }
@@ -395,7 +395,7 @@ h3 {
   display: block;
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(3.3rem, 15vw, 10.5rem);
+  font-size: clamp(3.3rem, 15vw, 7.6rem);
   line-height: 0.9;
   letter-spacing: -0.022em;
   color: var(--hero-ink);
@@ -415,7 +415,18 @@ h3 {
   font-size: clamp(1.35rem, 2.7vw, 2.15rem);
   color: var(--hero-ink);
 }
-.hero__badge { margin-top: clamp(16px, 2.4vw, 28px); pointer-events: auto; }
+.hero__badge-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(104px + env(safe-area-inset-bottom));
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.hero__badge { pointer-events: auto; }
+@media (min-width: 900px) { .hero__badge-wrap { bottom: 52px; } }
 
 .js .hero__tagline,
 .js .hero__badge {
@@ -493,10 +504,10 @@ h3 {
 .philo__line {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(2.5rem, 7.4vw, 6.6rem);
+  font-size: clamp(2.7rem, 10.5vw, 6.4rem);
   line-height: 1.02;
   letter-spacing: -0.018em;
-  max-width: 15ch;
+  max-width: 20ch;
   transition: opacity 0.7s var(--ease), color 0.7s var(--ease);
 }
 .philo__line.is-past { opacity: 0.26; }
@@ -504,12 +515,12 @@ h3 {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  padding: 0.16em 0 0.08em;
+  margin: -0.16em 0 -0.08em;
 }
 .philo__line .w > span {
   display: inline-block;
-  transform: translate3d(0, calc((1 - var(--wp, 1)) * 108%), 0);
+  transform: translate3d(0, calc((1 - var(--wp, 1)) * 135%), 0);
   opacity: calc(0.2 + var(--wp, 1) * 0.8);
 }
 .philo__rail {
@@ -673,11 +684,12 @@ h3 {
 .implant__stage {
   display: flex;
   flex-direction: column;
+  padding-top: var(--topbar-h);
   background: rgb(var(--implant-veil));
 }
 .implant__media {
   position: relative;
-  flex: 0 0 58%;
+  flex: 0 0 54%;
   overflow: hidden;
   background: var(--implant-bg);
 }
@@ -730,8 +742,8 @@ h3 {
 }
 
 @media (min-width: 900px) {
-  .implant__stage { display: block; background: var(--implant-bg); }
-  .implant__media { position: absolute; inset: 0; }
+  .implant__stage { display: block; padding-top: 0; background: var(--implant-bg); }
+  .implant__media { position: absolute; inset: var(--topbar-h) 0 0 0; }
   .implant__media::before {
     /* soft veil on the left so the copy stays legible over the frames */
     content: "";
@@ -915,10 +927,8 @@ h3 {
   transition: background-color 0.5s var(--ease), border-color 0.5s var(--ease);
 }
 .visit__step.is-in::before { background: var(--accent); border-color: var(--accent); }
-.js .visit__step {
-  opacity: calc(0.18 + var(--sp, 0) * 0.82);
-  transform: translate3d(0, calc((1 - var(--sp, 0)) * 26px), 0);
-}
+.js .visit__step { opacity: calc(0.18 + var(--sp, 0) * 0.82); }
+.js .visit__step > * { transform: translate3d(0, calc((1 - var(--sp, 0)) * 26px), 0); }
 .visit__num { display: block; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--ink-faint); }
 .visit__step h3 { margin: 6px 0 8px; font-size: clamp(1.7rem, 2.6vw, 2.2rem); font-weight: 500; }
 .visit__step p { color: var(--ink-soft); max-width: 30ch; }
@@ -960,11 +970,11 @@ h3 {
 .smile__line {
   position: relative;
   z-index: 4;
-  max-width: 13ch;
+  max-width: 15ch;
   padding: 0 var(--gutter) calc(104px + env(safe-area-inset-bottom));
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(2.3rem, 5.8vw, 5.2rem);
+  font-size: clamp(2.3rem, 4.8vw, 4.4rem);
   line-height: 1.02;
   letter-spacing: -0.015em;
   color: var(--ink);
@@ -974,7 +984,7 @@ h3 {
 @media (min-width: 900px) {
   .smile { align-items: center; }
   .smile::before { background: linear-gradient(90deg, rgba(246, 242, 236, 0.9) 0%, rgba(246, 242, 236, 0.55) 30%, rgba(246, 242, 236, 0) 54%); }
-  .smile__line { padding-bottom: 0; max-width: 12ch; }
+  .smile__line { padding-bottom: 0; max-width: 14ch; }
 }
 
 /* ---------- FAQ ---------- */
@@ -1087,6 +1097,7 @@ h3 {
 .form__status a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
 .booking__info { display: grid; gap: 28px; }
+.booking__info > .link-arrow { justify-self: start; }
 .contact-actions { display: grid; gap: 10px; }
 .info-block h3 {
   margin-bottom: 12px;
