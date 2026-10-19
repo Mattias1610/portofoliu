@@ -36,8 +36,8 @@
     <section class="page-hero" aria-labelledby="page-title">
       <div class="container">
         <p class="eyebrow reveal">Contact</p>
-        <h1 class="page-title reveal d1" id="page-title">Hai să <em>vorbim</em></h1>
-        <p class="page-lead reveal d2">Ai o idee de proiect, o întrebare sau o ofertă de internship? Scrie-mi și îți răspund cât pot de repede.</p>
+        <h1 class="page-title reveal delay-1" id="page-title">Hai să <em>vorbim</em></h1>
+        <p class="page-lead reveal delay-2">Ai o idee de proiect, o întrebare sau o ofertă de internship? Scrie-mi și îți răspund cât pot de repede.</p>
       </div>
     </section>
 
@@ -47,66 +47,66 @@
           <h2>Date de contact</h2>
           <p>Preferi să scrii direct? Mă găsești și aici:</p>
           <a class="info-card" href="mailto:dobaimattiasfx@gmail.com">
-            <span class="info-ico" aria-hidden="true">
+            <span class="info-icon" aria-hidden="true">
               <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 5.5L9 10l6.5-4.5" stroke="currentColor" stroke-width="1.4"/></svg>
             </span>
-            <span><span class="info-lbl">Email</span><span class="info-val">dobaimattiasfx@gmail.com</span></span>
+            <span><span class="info-label">Email</span><span class="info-value">dobaimattiasfx@gmail.com</span></span>
           </a>
           <a class="info-card" href="tel:+40769996906">
-            <span class="info-ico" aria-hidden="true">
+            <span class="info-icon" aria-hidden="true">
               <svg viewBox="0 0 18 18" fill="none"><path d="M3.5 2.5h3l1 3.2-1.6 1.6a9.5 9.5 0 004.8 4.8l1.6-1.6 3.2 1v3a1 1 0 01-1.1 1A13.8 13.8 0 012.5 3.6a1 1 0 011-1.1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
             </span>
-            <span><span class="info-lbl">Telefon</span><span class="info-val">0769&nbsp;996&nbsp;906</span></span>
+            <span><span class="info-label">Telefon</span><span class="info-value">0769&nbsp;996&nbsp;906</span></span>
           </a>
           <a class="info-card" href="https://instagram.com/_mattiasdobai" target="_blank" rel="noopener">
-            <span class="info-ico" aria-hidden="true">
+            <span class="info-icon" aria-hidden="true">
               <svg viewBox="0 0 18 18" fill="none"><rect x="2.5" y="2.5" width="13" height="13" rx="4" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="9" r="3.2" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="5" r="1" fill="currentColor"/></svg>
             </span>
-            <span><span class="info-lbl">Instagram</span><span class="info-val">@_mattiasdobai</span></span>
+            <span><span class="info-label">Instagram</span><span class="info-value">@_mattiasdobai</span></span>
           </a>
           <div class="info-card">
-            <span class="info-ico" aria-hidden="true">
+            <span class="info-icon" aria-hidden="true">
               <svg viewBox="0 0 16 16" fill="none"><path d="M8 14s5-4.5 5-8A5 5 0 003 6c0 3.5 5 8 5 8z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
             </span>
-            <span><span class="info-lbl">Locație</span><span class="info-val">Sibiu, România</span></span>
+            <span><span class="info-label">Locație</span><span class="info-value">Sibiu, România</span></span>
           </div>
         </div>
 
-        <form class="contact-form reveal d2" id="contactForm" novalidate aria-labelledby="form-title">
+        <form class="contact-form reveal delay-2" id="contactForm" novalidate aria-labelledby="form-title">
           <h2 class="form-title" id="form-title">Trimite un mesaj</h2>
-          <p class="form-note">Câmpurile marcate cu <span class="req" aria-hidden="true">*</span> sunt obligatorii.</p>
+          <p class="form-note">Câmpurile marcate cu <span class="required-mark" aria-hidden="true">*</span> sunt obligatorii.</p>
 
           <div class="form-status success" id="formSuccess" role="status" tabindex="-1">
-            <span class="mk" aria-hidden="true">✓</span>
+            <span class="status-icon" aria-hidden="true">✓</span>
             <span id="formSuccessMsg"></span>
           </div>
           <div class="form-status error" id="formError" role="alert" tabindex="-1">
-            <span class="mk" aria-hidden="true">✕</span>
+            <span class="status-icon" aria-hidden="true">✕</span>
             <span id="formErrorMsg"></span>
           </div>
 
-          <div class="frow">
+          <div class="field-row">
             <div class="field">
-              <label class="flbl" for="name">Nume complet <span class="req" aria-hidden="true">*</span></label>
-              <input class="inp" type="text" id="name" name="name" autocomplete="name" placeholder="Ex: Ana Popescu" maxlength="50" required aria-describedby="name-error">
+              <label class="field-label" for="name">Nume complet <span class="required-mark" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="name" name="name" autocomplete="name" placeholder="Ex: Ana Popescu" maxlength="50" required aria-describedby="name-error">
               <p class="field-error" id="name-error"></p>
             </div>
             <div class="field">
-              <label class="flbl" for="email">Email <span class="req" aria-hidden="true">*</span></label>
-              <input class="inp" type="email" id="email" name="email" autocomplete="email" placeholder="nume@exemplu.ro" required aria-describedby="email-error">
+              <label class="field-label" for="email">Email <span class="required-mark" aria-hidden="true">*</span></label>
+              <input class="input" type="email" id="email" name="email" autocomplete="email" placeholder="nume@exemplu.ro" required aria-describedby="email-error">
               <p class="field-error" id="email-error"></p>
             </div>
           </div>
 
-          <div class="frow">
+          <div class="field-row">
             <div class="field">
-              <label class="flbl" for="phone">Telefon <span class="opt">(opțional)</span></label>
-              <input class="inp" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Ex: 0712 345 678" aria-describedby="phone-error">
+              <label class="field-label" for="phone">Telefon <span class="optional-mark">(opțional)</span></label>
+              <input class="input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Ex: 0712 345 678" aria-describedby="phone-error">
               <p class="field-error" id="phone-error"></p>
             </div>
             <div class="field">
-              <label class="flbl" for="subject">Subiect <span class="req" aria-hidden="true">*</span></label>
-              <select class="inp" id="subject" name="subject" required aria-describedby="subject-error">
+              <label class="field-label" for="subject">Subiect <span class="required-mark" aria-hidden="true">*</span></label>
+              <select class="input" id="subject" name="subject" required aria-describedby="subject-error">
                 <option value="">Alege un subiect</option>
                 <option value="colaborare">Colaborare pe un proiect</option>
                 <option value="internship">Internship sau job</option>
@@ -118,8 +118,8 @@
           </div>
 
           <div class="field">
-            <label class="flbl" for="message">Mesaj <span class="req" aria-hidden="true">*</span></label>
-            <textarea class="inp" id="message" name="message" rows="6" maxlength="1000" placeholder="Scrie mesajul tău aici (minimum 10 caractere)…" required aria-describedby="message-error message-counter"></textarea>
+            <label class="field-label" for="message">Mesaj <span class="required-mark" aria-hidden="true">*</span></label>
+            <textarea class="input" id="message" name="message" rows="6" maxlength="1000" placeholder="Scrie mesajul tău aici (minimum 10 caractere)…" required aria-describedby="message-error message-counter"></textarea>
             <div class="field-foot">
               <p class="field-error" id="message-error"></p>
               <span class="counter" id="message-counter">0 / 1000</span>
@@ -128,7 +128,7 @@
 
           <div class="form-actions">
             <small>Mesajul se deschide în aplicația ta de email, gata de trimis.</small>
-            <button class="btn btn-pri" type="submit">
+            <button class="btn btn-primary" type="submit">
               Trimite mesajul
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -153,15 +153,15 @@
         </ul>
       </nav>
       <div class="footer-contact">
-        <a class="fc-link" href="tel:+40769996906">
+        <a class="footer-link" href="tel:+40769996906">
           <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.5 2.5h3l1 3.2-1.6 1.6a9.5 9.5 0 004.8 4.8l1.6-1.6 3.2 1v3a1 1 0 01-1.1 1A13.8 13.8 0 012.5 3.6a1 1 0 011-1.1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
           0769&nbsp;996&nbsp;906
         </a>
-        <a class="fc-link" href="mailto:dobaimattiasfx@gmail.com">
+        <a class="footer-link" href="mailto:dobaimattiasfx@gmail.com">
           <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="4" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 5.5L9 10l6.5-4.5" stroke="currentColor" stroke-width="1.4"/></svg>
           dobaimattiasfx@gmail.com
         </a>
-        <a class="fc-link" href="https://instagram.com/_mattiasdobai" target="_blank" rel="noopener">
+        <a class="footer-link" href="https://instagram.com/_mattiasdobai" target="_blank" rel="noopener">
           <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="13" height="13" rx="4" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="9" r="3.2" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="5" r="1" fill="currentColor"/></svg>
           @_mattiasdobai
         </a>
