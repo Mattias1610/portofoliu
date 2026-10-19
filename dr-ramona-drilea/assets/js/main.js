@@ -166,9 +166,14 @@
 
     resize() {
       const rect = this.canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, finePointer ? 2 : 1.5);
-      const w = Math.max(1, Math.round(rect.width * dpr));
-      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (!rect.width || !rect.height) return;
+      // never draw at more pixels than the frames have: past that point the
+      // extra canvas area costs fill time on phones and adds no detail
+      const [iw, ih] = (pick(this.canvas, 'size') || '').split('x').map(Number);
+      const sourceRatio = iw && ih ? 1 / Math.max(rect.width / iw, rect.height / ih) : 2;
+      const k = Math.min(window.devicePixelRatio || 1, Math.max(0.5, sourceRatio));
+      const w = Math.max(1, Math.round(rect.width * k));
+      const h = Math.max(1, Math.round(rect.height * k));
       if (w !== this.canvas.width || h !== this.canvas.height) {
         this.canvas.width = w;
         this.canvas.height = h;
