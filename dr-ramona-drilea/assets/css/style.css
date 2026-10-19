@@ -154,6 +154,8 @@ em { font-style: italic; }
   border: 0;
 }
 
+.nowrap { white-space: nowrap; }
+
 .skip-link {
   position: fixed;
   top: 12px; left: 12px;

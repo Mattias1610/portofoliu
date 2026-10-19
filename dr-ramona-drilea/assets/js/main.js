@@ -558,10 +558,10 @@
       else { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); done(); }
       return;
     }
+    const top = target.getBoundingClientRect().top + window.scrollY - topbarHeight();
     if (lenis) {
-      lenis.scrollTo(target, { offset: -topbarHeight(), duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4), onComplete: done });
+      lenis.scrollTo(top, { duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4), onComplete: done });
     } else {
-      const top = target.getBoundingClientRect().top + window.scrollY - topbarHeight();
       window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
       done();
     }
