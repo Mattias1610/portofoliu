@@ -1,4 +1,4 @@
-const CFG = {
+const CONFIG = {
   CLIENT_ID: '1042964850310-g3jqu4hpqr8bfumtul2cg7k6hcvpv8d6.apps.googleusercontent.com',
   SCOPE: 'https://www.googleapis.com/auth/calendar.events',
   GITHUB_USER: 'Mattias1610',
@@ -42,8 +42,8 @@ const ICONS = {
   trash: '<svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 5h12M7 5V3h4v2M5 5l.7 10h6.6L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
 
-const DOW = ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'];
-const MON = ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'];
+const WEEKDAYS = ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'];
+const MONTHS = ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const relativeTime = new Intl.RelativeTimeFormat('ro', { numeric: 'auto' });
@@ -187,17 +187,17 @@ function initBackToTop() {
 }
 
 async function fetchRepos() {
-  const cacheKey = `gh_repos_${CFG.GITHUB_USER}`;
+  const cacheKey = `gh_repos_${CONFIG.GITHUB_USER}`;
   try {
     const cached = JSON.parse(store.get('sessionStorage', cacheKey));
-    if (cached && Date.now() - cached.time < CFG.CACHE_MS) return cached.data;
+    if (cached && Date.now() - cached.time < CONFIG.CACHE_MS) return cached.data;
   } catch {
     store.remove('sessionStorage', cacheKey);
   }
 
   let res;
   try {
-    res = await fetch(`https://api.github.com/users/${CFG.GITHUB_USER}/repos?sort=updated&per_page=100`);
+    res = await fetch(`https://api.github.com/users/${CONFIG.GITHUB_USER}/repos?sort=updated&per_page=100`);
   } catch {
     throw new Error('Ups! Nu am putut încărca proiectele momentan. Verifică conexiunea la internet.');
   }
@@ -228,7 +228,7 @@ function repoCard(repo) {
   card.href = repo.url;
   card.target = '_blank';
   card.rel = 'noopener';
-  const color = LANG_COLORS[repo.language] || 'var(--gold)';
+  const color = LANG_COLORS[repo.language] || 'var(--color-accent)';
   card.innerHTML = `
     <div class="repo-top">
       <h3 class="repo-name">${ICONS.repo}${esc(repo.name)}</h3>
@@ -269,7 +269,7 @@ async function initHome() {
         <div class="st">
           <span class="ico" aria-hidden="true">⚠️</span>
           <span>${esc(err.message)}</span>
-          <a class="btn btn-out btn-sm" href="https://github.com/${CFG.GITHUB_USER}" target="_blank" rel="noopener">Vezi direct pe GitHub</a>
+          <a class="btn btn-out btn-sm" href="https://github.com/${CONFIG.GITHUB_USER}" target="_blank" rel="noopener">Vezi direct pe GitHub</a>
         </div>`;
     }
   } finally {
@@ -282,7 +282,7 @@ function initProjects() {
   if (!grid) return;
 
   const state = { repos: [], filter: 'all', query: '', expanded: false };
-  const els = {
+  const elements = {
     load: $('#repoLoad'),
     err: $('#repoErr'),
     errMsg: $('#repoErrMsg'),
@@ -314,7 +314,7 @@ function initProjects() {
     const languages = Object.keys(counts).sort((a, b) =>
       (a === 'Nespecificat') - (b === 'Nespecificat') || counts[b] - counts[a] || a.localeCompare(b)
     );
-    els.buttons.innerHTML = '';
+    elements.buttons.innerHTML = '';
     [['all', 'Toate', state.repos.length], ...languages.map(lang => [lang, lang, counts[lang]])].forEach(([value, label, n]) => {
       const button = document.createElement('button');
       const active = value === state.filter;
@@ -323,58 +323,58 @@ function initProjects() {
       button.dataset.filter = value;
       button.setAttribute('aria-pressed', String(active));
       button.innerHTML = `${esc(label)} <span class="count">${n}</span>`;
-      els.buttons.appendChild(button);
+      elements.buttons.appendChild(button);
     });
   };
 
   const render = () => {
     const list = state.repos.filter(matches);
-    const visible = state.expanded ? list : list.slice(0, CFG.REPO_PAGE);
+    const visible = state.expanded ? list : list.slice(0, CONFIG.REPO_PAGE);
     grid.innerHTML = '';
     const cards = visible.map(repoCard);
     grid.append(...cards);
     observeReveal(cards);
-    els.empty.hidden = list.length > 0;
-    els.info.textContent = list.length ? `Afișez ${visible.length} din ${plural(list.length, 'proiect', 'proiecte')}` : '';
-    els.toggle.hidden = list.length <= CFG.REPO_PAGE;
-    els.toggleBtn.textContent = state.expanded ? 'Arată mai puține' : `Vezi toate proiectele (${list.length})`;
-    els.toggleBtn.setAttribute('aria-expanded', String(state.expanded));
+    elements.empty.hidden = list.length > 0;
+    elements.info.textContent = list.length ? `Afișez ${visible.length} din ${plural(list.length, 'proiect', 'proiecte')}` : '';
+    elements.toggle.hidden = list.length <= CONFIG.REPO_PAGE;
+    elements.toggleBtn.textContent = state.expanded ? 'Arată mai puține' : `Vezi toate proiectele (${list.length})`;
+    elements.toggleBtn.setAttribute('aria-expanded', String(state.expanded));
   };
 
   const showStatus = status => {
-    els.load.hidden = status !== 'load';
-    els.err.hidden = status !== 'err';
+    elements.load.hidden = status !== 'load';
+    elements.err.hidden = status !== 'err';
   };
 
   async function load() {
     showStatus('load');
-    els.filters.hidden = true;
-    els.empty.hidden = true;
-    els.toggle.hidden = true;
+    elements.filters.hidden = true;
+    elements.empty.hidden = true;
+    elements.toggle.hidden = true;
     grid.innerHTML = '';
     try {
       state.repos = await fetchRepos();
       if (!state.repos.length) {
-        els.errMsg.textContent = 'Nu există încă repository-uri publice.';
+        elements.errMsg.textContent = 'Nu există încă repository-uri publice.';
         showStatus('err');
         return;
       }
       showStatus('none');
-      els.filters.hidden = false;
+      elements.filters.hidden = false;
       buildFilters();
       render();
     } catch (err) {
-      els.errMsg.textContent = err.message;
+      elements.errMsg.textContent = err.message;
       showStatus('err');
     }
   }
 
-  els.buttons.addEventListener('click', e => {
+  elements.buttons.addEventListener('click', e => {
     const button = e.target.closest('.filter-btn');
     if (!button) return;
     state.filter = button.dataset.filter;
     state.expanded = false;
-    $$('.filter-btn', els.buttons).forEach(btn => {
+    $$('.filter-btn', elements.buttons).forEach(btn => {
       const active = btn === button;
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', String(active));
@@ -382,26 +382,26 @@ function initProjects() {
     render();
   });
 
-  els.search.addEventListener('input', debounce(() => {
-    state.query = els.search.value.trim().toLowerCase();
+  elements.search.addEventListener('input', debounce(() => {
+    state.query = elements.search.value.trim().toLowerCase();
     state.expanded = false;
     render();
   }, 150));
 
-  els.toggleBtn.addEventListener('click', () => {
+  elements.toggleBtn.addEventListener('click', () => {
     state.expanded = !state.expanded;
     render();
-    if (!state.expanded) scrollToElement(els.filters);
+    if (!state.expanded) scrollToElement(elements.filters);
   });
 
   $('#repoReset').addEventListener('click', () => {
     state.filter = 'all';
     state.query = '';
     state.expanded = false;
-    els.search.value = '';
+    elements.search.value = '';
     buildFilters();
     render();
-    els.search.focus();
+    elements.search.focus();
   });
 
   $('#repoRetry').addEventListener('click', load);
@@ -517,7 +517,7 @@ function initContactForm() {
     const subjectText = form.elements.subject.selectedOptions[0].textContent;
     const lines = [data.message, '', `— ${data.name}`, data.email];
     if (data.phone) lines.push(data.phone);
-    const mailto = `mailto:${CFG.CONTACT_EMAIL}?subject=${encodeURIComponent(`[Portofoliu] ${subjectText}`)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    const mailto = `mailto:${CONFIG.CONTACT_EMAIL}?subject=${encodeURIComponent(`[Portofoliu] ${subjectText}`)}&body=${encodeURIComponent(lines.join('\n'))}`;
 
     $('#formSuccessMsg').textContent = `Mulțumesc, ${data.name.split(/\s+/)[0]}! Mesajul e pregătit în aplicația ta de email — verifică-l și apasă „Trimite”.`;
     success.classList.add('show');
@@ -535,7 +535,7 @@ const GCAL_BASE = 'https://www.googleapis.com/calendar/v3/calendars/primary/even
 const DEMO_KEY = 'demo_calendar_events';
 const TOKEN_KEY = 'g_tok';
 
-const cal = {
+const calendarState = {
   tokenClient: null,
   token: null,
   all: [],
@@ -580,7 +580,7 @@ function initCalendar() {
   $('#agenda').addEventListener('click', e => {
     const button = e.target.closest('.ev-btn');
     if (!button) return;
-    const ev = cal.all.find(item => item.id === button.dataset.id);
+    const ev = calendarState.all.find(item => item.id === button.dataset.id);
     if (!ev) return;
     if (button.classList.contains('edit')) openEventModal(ev);
     else confirmDelete(ev);
@@ -606,9 +606,9 @@ function initAuth(attempt = 0) {
     if (attempt < 40) setTimeout(() => initAuth(attempt + 1), 300);
     return;
   }
-  cal.tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CFG.CLIENT_ID,
-    scope: CFG.SCOPE,
+  calendarState.tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: CONFIG.CLIENT_ID,
+    scope: CONFIG.SCOPE,
     callback: onToken
   });
 }
@@ -617,11 +617,11 @@ function restoreSession() {
   try {
     const saved = JSON.parse(store.get('sessionStorage', TOKEN_KEY));
     if (saved && saved.token && saved.exp > Date.now() + 30000) {
-      cal.token = saved.token;
+      calendarState.token = saved.token;
       return true;
     }
   } catch {
-    cal.token = null;
+    calendarState.token = null;
   }
   store.remove('sessionStorage', TOKEN_KEY);
   return false;
@@ -632,31 +632,31 @@ function onToken(response) {
     toast(`Autentificare eșuată: ${response.error}`, 'err');
     return;
   }
-  cal.token = response.access_token;
+  calendarState.token = response.access_token;
   const expiresIn = (Number(response.expires_in) || 3600) * 1000;
-  store.set('sessionStorage', TOKEN_KEY, JSON.stringify({ token: cal.token, exp: Date.now() + expiresIn }));
+  store.set('sessionStorage', TOKEN_KEY, JSON.stringify({ token: calendarState.token, exp: Date.now() + expiresIn }));
   setAuthUI(true);
   loadEvents();
 }
 
 function handleAuth() {
-  if (cal.token) {
+  if (calendarState.token) {
     signOut();
     return;
   }
-  if (!cal.tokenClient) {
+  if (!calendarState.tokenClient) {
     toast('Serviciul Google nu s-a încărcat încă. Verifică conexiunea și încearcă din nou.', 'info');
     initAuth();
     return;
   }
-  cal.tokenClient.requestAccessToken({ prompt: '' });
+  calendarState.tokenClient.requestAccessToken({ prompt: '' });
 }
 
 function signOut() {
-  if (cal.token && typeof google !== 'undefined' && google.accounts?.oauth2) {
-    google.accounts.oauth2.revoke(cal.token, () => {});
+  if (calendarState.token && typeof google !== 'undefined' && google.accounts?.oauth2) {
+    google.accounts.oauth2.revoke(calendarState.token, () => {});
   }
-  cal.token = null;
+  calendarState.token = null;
   store.remove('sessionStorage', TOKEN_KEY);
   setAuthUI(false);
   resetCalendar();
@@ -664,7 +664,7 @@ function signOut() {
 }
 
 function onExpired() {
-  cal.token = null;
+  calendarState.token = null;
   store.remove('sessionStorage', TOKEN_KEY);
   closeEventModal();
   closeConfirm();
@@ -684,12 +684,12 @@ function setAuthUI(on, message) {
 }
 
 async function gcal(url, options = {}) {
-  if (!cal.token) throw new Error('Nu ești autentificat.');
+  if (!calendarState.token) throw new Error('Nu ești autentificat.');
   let res;
   try {
     res = await fetch(url, {
       ...options,
-      headers: { Authorization: `Bearer ${cal.token}`, 'Content-Type': 'application/json', ...(options.headers || {}) }
+      headers: { Authorization: `Bearer ${calendarState.token}`, 'Content-Type': 'application/json', ...(options.headers || {}) }
     });
   } catch {
     throw new Error('Nu s-au putut încărca datele. Verifică conexiunea sau încearcă din nou.');
@@ -733,8 +733,8 @@ function apiDelete(id) {
 function eventBody({ title, start, end, loc }) {
   const body = {
     summary: title.trim(),
-    start: { dateTime: new Date(start).toISOString(), timeZone: CFG.TZ },
-    end: { dateTime: new Date(end).toISOString(), timeZone: CFG.TZ }
+    start: { dateTime: new Date(start).toISOString(), timeZone: CONFIG.TZ },
+    end: { dateTime: new Date(end).toISOString(), timeZone: CONFIG.TZ }
   };
   if (loc && loc.trim()) body.location = loc.trim();
   return body;
@@ -755,8 +755,8 @@ function parseEvent(item) {
 }
 
 async function loadEvents() {
-  if (cal.fetching) return;
-  cal.fetching = true;
+  if (calendarState.fetching) return;
+  calendarState.fetching = true;
   showState('load');
   const items = [];
   try {
@@ -768,13 +768,13 @@ async function loadEvents() {
       pageToken = data.nextPageToken || null;
       pages++;
     } while (pageToken && pages < 3);
-    cal.all = items.concat(getDemoEvents());
+    calendarState.all = items.concat(getDemoEvents());
     updateDemoBanner(items.length);
     applyEventFilters();
   } catch (err) {
     showState('err', err.message);
   } finally {
-    cal.fetching = false;
+    calendarState.fetching = false;
   }
 }
 
@@ -795,7 +795,7 @@ function saveDemoEvents(list) {
 function updateDemoBanner(realCount) {
   const hasDemo = getDemoEvents().length > 0;
   const banner = $('#demoBanner');
-  banner.hidden = !(realCount < CFG.MIN_ENTRIES || hasDemo);
+  banner.hidden = !(realCount < CONFIG.MIN_ENTRIES || hasDemo);
   if (banner.hidden) return;
   $('#demoCount').textContent = realCount === 0 ? 'Niciun eveniment real' : plural(realCount, 'eveniment real', 'evenimente reale');
   $('#demoMsg').textContent = hasDemo
@@ -868,20 +868,20 @@ function applyEventFilters() {
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
-  cal.filtered = cal.all.filter(ev => {
+  calendarState.filtered = calendarState.all.filter(ev => {
     if (query && !ev.title.toLowerCase().includes(query)) return false;
-    if (cal.range === '7') return ev.start >= weekAgo && ev.start <= now;
-    if (cal.range === 'up') return ev.end >= now;
-    if (cal.range === 'month') return ev.start >= monthStart && ev.start < monthEnd;
+    if (calendarState.range === '7') return ev.start >= weekAgo && ev.start <= now;
+    if (calendarState.range === 'up') return ev.end >= now;
+    if (calendarState.range === 'month') return ev.start >= monthStart && ev.start < monthEnd;
     return true;
   });
-  cal.filtered.sort((a, b) => (order === 'asc' ? a.start - b.start : b.start - a.start));
-  cal.page = 0;
+  calendarState.filtered.sort((a, b) => (order === 'asc' ? a.start - b.start : b.start - a.start));
+  calendarState.page = 0;
   renderEvents();
 }
 
 function setRange(chip) {
-  cal.range = chip.dataset.r;
+  calendarState.range = chip.dataset.r;
   $$('.rchip').forEach(c => {
     const active = c === chip;
     c.classList.toggle('active', active);
@@ -891,17 +891,17 @@ function setRange(chip) {
 }
 
 function changePage(delta) {
-  const total = Math.ceil(cal.filtered.length / CFG.EVENT_PAGE);
-  const next = cal.page + delta;
+  const total = Math.ceil(calendarState.filtered.length / CONFIG.EVENT_PAGE);
+  const next = calendarState.page + delta;
   if (next < 0 || next >= total) return;
-  cal.page = next;
+  calendarState.page = next;
   renderEvents();
   scrollToElement($('#crudPanel'));
 }
 
 function renderEvents() {
-  const start = cal.page * CFG.EVENT_PAGE;
-  const slice = cal.filtered.slice(start, start + CFG.EVENT_PAGE);
+  const start = calendarState.page * CONFIG.EVENT_PAGE;
+  const slice = calendarState.filtered.slice(start, start + CONFIG.EVENT_PAGE);
   const agenda = $('#agenda');
   const pagination = $('#pag');
   agenda.innerHTML = '';
@@ -927,9 +927,9 @@ function renderEvents() {
     group.className = 'day-group';
     group.innerHTML = `
       <div class="day-head">
-        <div class="day-dow">${DOW[day.getDay()]}</div>
+        <div class="day-dow">${WEEKDAYS[day.getDay()]}</div>
         <div class="day-num${key === todayKey ? ' today' : ''}">${day.getDate()}</div>
-        <div class="day-mon">${MON[day.getMonth()]}</div>
+        <div class="day-mon">${MONTHS[day.getMonth()]}</div>
       </div>
       <div class="events"></div>`;
     const box = $('.events', group);
@@ -937,12 +937,12 @@ function renderEvents() {
     agenda.appendChild(group);
   });
 
-  const total = Math.ceil(cal.filtered.length / CFG.EVENT_PAGE);
+  const total = Math.ceil(calendarState.filtered.length / CONFIG.EVENT_PAGE);
   pagination.hidden = total <= 1;
   if (total > 1) {
-    $('#pagInfo').textContent = `Pagina ${cal.page + 1} din ${total}`;
-    $('#prevBtn').disabled = cal.page === 0;
-    $('#nextBtn').disabled = cal.page >= total - 1;
+    $('#pagInfo').textContent = `Pagina ${calendarState.page + 1} din ${total}`;
+    $('#prevBtn').disabled = calendarState.page === 0;
+    $('#nextBtn').disabled = calendarState.page >= total - 1;
   }
 }
 
@@ -966,8 +966,8 @@ function eventCard(ev) {
 }
 
 function openEventModal(ev = null) {
-  cal.lastFocus = document.activeElement;
-  cal.editId = ev ? ev.id : null;
+  calendarState.lastFocus = document.activeElement;
+  calendarState.editId = ev ? ev.id : null;
   $('#mTitle').textContent = ev ? 'Editează eveniment' : 'Eveniment nou';
   $('#saveLbl').textContent = ev ? 'Salvează modificările' : 'Salvează';
   $('#fTitle').value = ev ? ev.title : '';
@@ -983,7 +983,7 @@ function closeEventModal() {
   const overlay = $('#ov');
   if (!overlay?.classList.contains('open')) return;
   overlay.classList.remove('open');
-  cal.lastFocus?.focus();
+  calendarState.lastFocus?.focus();
 }
 
 function showModalError(message) {
@@ -1011,11 +1011,11 @@ async function saveEvent() {
   $('#mErr').hidden = true;
   setSaving(true);
   try {
-    if (cal.editId && String(cal.editId).startsWith('demo_')) {
-      updateDemoEvent(cal.editId, data);
+    if (calendarState.editId && String(calendarState.editId).startsWith('demo_')) {
+      updateDemoEvent(calendarState.editId, data);
       toast('Eveniment demo actualizat.', 'ok');
-    } else if (cal.editId) {
-      await apiUpdate(cal.editId, data);
+    } else if (calendarState.editId) {
+      await apiUpdate(calendarState.editId, data);
       toast('Eveniment actualizat.', 'ok');
     } else {
       await apiCreate(data);
@@ -1024,14 +1024,14 @@ async function saveEvent() {
     closeEventModal();
     await loadEvents();
   } catch (err) {
-    if (cal.token) showModalError(err.message);
+    if (calendarState.token) showModalError(err.message);
   } finally {
     setSaving(false);
   }
 }
 
 function confirmDelete(ev) {
-  cal.lastFocus = document.activeElement;
+  calendarState.lastFocus = document.activeElement;
   $('#confMsg').textContent = `Sigur vrei să ștergi „${ev.title}”? Acțiunea este ireversibilă.`;
   $('#confDelBtn').onclick = () => deleteEvent(ev);
   $('#ovConfirm').classList.add('open');
@@ -1042,7 +1042,7 @@ function closeConfirm() {
   const overlay = $('#ovConfirm');
   if (!overlay?.classList.contains('open')) return;
   overlay.classList.remove('open');
-  cal.lastFocus?.focus();
+  calendarState.lastFocus?.focus();
 }
 
 async function deleteEvent(ev) {
@@ -1058,7 +1058,7 @@ async function deleteEvent(ev) {
     toast(`„${ev.title}” a fost șters.`, 'ok');
     await loadEvents();
   } catch (err) {
-    if (cal.token) toast(`Eroare la ștergere: ${err.message}`, 'err');
+    if (calendarState.token) toast(`Eroare la ștergere: ${err.message}`, 'err');
   }
 }
 
@@ -1073,10 +1073,10 @@ function showState(state, message = '') {
 }
 
 function resetCalendar() {
-  cal.all = [];
-  cal.filtered = [];
-  cal.page = 0;
-  cal.range = 'all';
+  calendarState.all = [];
+  calendarState.filtered = [];
+  calendarState.page = 0;
+  calendarState.range = 'all';
   $('#agenda').innerHTML = '';
   $('#pag').hidden = true;
   $('#demoBanner').hidden = true;
