@@ -242,16 +242,20 @@
       const P = Math.max(p, intro.value);
       heroSeq.render(P);
 
+      // set on the hero and the bar only: a custom property on :root would
+      // restyle the whole document on every scroll frame
       const ink = smooth(0.2, 0.48, P);
-      root.style.setProperty('--hero-ink', mixInk(ink));
-      root.style.setProperty('--topbar-ink', mixInk(smooth(0.16, 0.42, P)));
+      heroStage.style.setProperty('--hero-ink', mixInk(ink));
       heroStage.style.setProperty('--hero-glow', (ink * 0.45).toFixed(3));
+      if (topbar) topbar.style.setProperty('--topbar-ink', mixInk(smooth(0.16, 0.42, P)));
 
       const n = heroChars.length;
       heroChars.forEach((ch, i) => {
         const a = 0.12 + (i / n) * 0.27;
-        const lp = smooth(a, a + 0.2, P);
-        ch.style.opacity = lp.toFixed(3);
+        const lp = Math.round(smooth(a, a + 0.2, P) * 1000) / 1000;
+        if (ch._lp === lp) return;
+        ch._lp = lp;
+        ch.style.opacity = lp;
         ch.style.transform = `translate3d(0, ${((1 - lp) * 0.3).toFixed(3)}em, 0) scale(${(1 + (1 - lp) * 0.38).toFixed(3)})`;
         if (finePointer) ch.style.filter = lp < 0.999 ? `blur(${((1 - lp) * 9).toFixed(2)}px)` : 'none';
       });

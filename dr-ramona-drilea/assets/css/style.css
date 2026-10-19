@@ -293,7 +293,7 @@ h3 {
   transition: background-color 0.5s var(--ease), border-color 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
 }
 .topbar.is-solid {
-  --topbar-ink: var(--ink);
+  color: var(--ink);
   background: rgba(246, 242, 236, 0.8);
   -webkit-backdrop-filter: blur(16px) saturate(1.15);
   backdrop-filter: blur(16px) saturate(1.15);
